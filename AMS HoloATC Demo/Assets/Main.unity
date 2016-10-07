@@ -99,7 +99,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 794948723}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: HologramCollection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

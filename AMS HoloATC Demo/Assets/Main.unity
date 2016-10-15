@@ -98,6 +98,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 794948723}
+  - 114: {fileID: 794948725}
+  - 114: {fileID: 794948724}
   m_Layer: 0
   m_Name: HologramCollection
   m_TagString: Untagged
@@ -118,6 +120,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &794948724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 794948722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d2d8314e2802842a914a1fd76558cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Aircraft: {fileID: 1000013419110970, guid: 5213fe69943169f4295d38c3e455bd53, type: 2}
+  TopLevelName: HologramCollection
+--- !u!114 &794948725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 794948722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2e01667c25c2c4db9a9d97d32ee402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DataUrl: http://yourflightdataservice.azurewebsites.net/
 --- !u!1001 &1021580179
 Prefab:
   m_ObjectHideFlags: 0

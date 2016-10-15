@@ -346,11 +346,11 @@ PlayerSettings:
   scriptingDefineSymbols: {}
   metroPackageName: AMSHoloATCDemo
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 0086d63e1142d301
   metroApplicationDescription: AMS HoloATC Demo
   wsaImages: {}
   metroTileShortName: 
@@ -374,7 +374,7 @@ PlayerSettings:
       CodeGeneration: False
       EnterpriseAuthentication: False
       HumanInterfaceDevice: False
-      InternetClient: False
+      InternetClient: True
       InternetClientServer: False
       Location: False
       Microphone: False
@@ -386,7 +386,7 @@ PlayerSettings:
       Proximity: False
       RemovableStorage: False
       SharedUserCertificates: False
-      SpatialPerception: False
+      SpatialPerception: True
       UserAccountInformation: False
       VideosLibrary: False
       VoipCall: False
@@ -462,7 +462,7 @@ PlayerSettings:
   - iOS::VR::enable
   - tvOS::VR::enable
   Android::VR::enable: 0
-  Metro::VR::enable: 0
+  Metro::VR::enable: 1
   N3DS::VR::enable: 0
   PS3::VR::enable: 0
   PS4::VR::enable: 0

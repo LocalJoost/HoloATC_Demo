@@ -181,11 +181,17 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AMS HoloATC Demo\Assets\App\Scripts\DataObjects\Coordinate.cs">
+      <Link>DataObjects\Coordinate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\AMS HoloATC Demo\Assets\App\Scripts\DataObjects\Flight.cs">
+      <Link>DataObjects\Flight.cs</Link>
+    </Compile>
+    <Compile Include="..\..\AMS HoloATC Demo\Assets\App\Scripts\DataObjects\TrackType.cs">
+      <Link>DataObjects\TrackType.cs</Link>
+    </Compile>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="Controllers\FlightDataController.cs" />
-    <Compile Include="DataObjects\Coordinate.cs" />
-    <Compile Include="DataObjects\Flight.cs" />
-    <Compile Include="DataObjects\TrackType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

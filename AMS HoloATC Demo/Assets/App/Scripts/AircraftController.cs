@@ -10,13 +10,15 @@ public class AircraftController : MonoBehaviour
   private TextMesh _text;
   private bool _initComplete;
   private bool _firstMove;
+  private GameObject _label;
+
 
   void Start()
   {
     _text = transform.GetComponentInChildren<TextMesh>();
+    _label = transform.FindChild("Label").gameObject;
     _initComplete = true;
   }
-
 
   public void SetNewFlightData(Flight newFlightData)
   {
@@ -29,7 +31,7 @@ public class AircraftController : MonoBehaviour
       ExtractSpeedAndHeading();
       if (move)
       {
-        SetLocationOrientation();
+        StartSetLocationOrientation();
       }
       else
       {
@@ -54,6 +56,22 @@ public class AircraftController : MonoBehaviour
     }
   }
 
+
+  private void StartSetLocationOrientation()
+  {
+    if (_firstMove)
+    {
+      iTween.FadeTo(_label,
+          iTween.Hash("alpha", 0.0f, "time", 0.5f, 
+          "oncomplete", "SetLocationOrientation",
+          "oncompletetarget", gameObject));
+    }
+    else
+    {
+      SetLocationOrientation();
+    }
+  }
+
   private void SetNewFlightText()
   {
     var speedText =
@@ -72,16 +90,27 @@ public class AircraftController : MonoBehaviour
   {
     SetNewFlightText();
 
-    transform.localPosition = GetFlightLocation();
-    if (_flightData.Heading != null)
-    {
-      transform.localEulerAngles = GetNewRotation();
-    }
     if (!_firstMove)
     {
+      transform.localPosition = GetFlightLocation();
+      if (_flightData.Heading != null)
+      {
+        transform.localEulerAngles = GetNewRotation();
+      }
       transform.localScale = new Vector3(0.0015f, 0.0015f, 0.0015f);
       _firstMove = true;
     }
+    else
+    {
+      iTween.MoveTo(gameObject, iTween.Hash("position", GetFlightLocation(), 
+        "time", 7f, "islocal", true));
+      if (_flightData.Heading != null)
+      {
+        iTween.RotateTo(gameObject, iTween.Hash("rotation", GetNewRotation(), 
+          "time", 7f, "islocal", true));
+      }
+    }
+    iTween.FadeTo(_label, iTween.Hash("alpha", 1f, "time", 0.5f, "delay", 0.2f));
   }
 
   private Vector3 GetFlightLocation()

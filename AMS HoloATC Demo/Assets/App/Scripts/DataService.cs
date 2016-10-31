@@ -19,12 +19,12 @@ public class DataService : Singleton<DataService>
   public DataService()
   {
 #if UNITY_UWP
-    _client = new MobileServiceClient(new Uri(DataUrl));
+        _client = new MobileServiceClient(new Uri("http://flightservicesdemo.azurewebsites.net"));
 #endif
-  }
+    }
 
 #if UNITY_UWP
-  public async Task<List<Flight>> GetFlights()
+    public async Task<List<Flight>> GetFlights()
   {
     var result = await _client.InvokeApiAsync<List<Flight>>(
                   "FlightData", HttpMethod.Get, null);

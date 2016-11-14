@@ -6,12 +6,19 @@ using System.Web.Http;
 using FlightDataService.DataObjects;
 using Microsoft.Azure.Mobile.Server.Config;
 using Newtonsoft.Json;
+using System.Runtime.Caching;
+using System.Net.Http;
+using System.Net;
 
 namespace FlightDataService.Controllers
 {
-    [MobileAppController]
-    public class FlightDataController : ApiController
-    {
+  [MobileAppController]
+  public class FlightDataController : ApiController
+  {
+    private ObjectCache Cache = MemoryCache.Default;
+
+    private const string ActiveIdKey = "ActiveId";
+
     // GET api/FlightData
     [HttpGet]
     public List<Flight> Get()
@@ -29,8 +36,26 @@ namespace FlightDataService.Controllers
       using (var stream = datafile.OpenText())
       {
         var flights = JsonConvert.DeserializeObject<List<Flight>>(stream.ReadLine());
+
+        var activeKey = Cache[ActiveIdKey] as string;
+        if (activeKey != null)
+        {
+          var activeFlight = flights.FirstOrDefault(p => p.Id == activeKey);
+          if (activeFlight != null)
+          {
+            activeFlight.IsActive = true;
+          }
+        }
+
         return flights;
       }
+    }
+
+    [HttpPost]
+    public HttpResponseMessage Post(string activeId)
+    {
+      Cache[ActiveIdKey] = activeId;
+      return Request.CreateResponse(HttpStatusCode.OK);
     }
   }
 }

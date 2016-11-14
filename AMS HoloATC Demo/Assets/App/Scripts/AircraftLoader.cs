@@ -26,13 +26,16 @@ public class AircraftLoader : MonoBehaviour
 
   private GameObject _topLevelObject;
 
+  private AudioSource _sound;
+
   // Use this for initialization
   void Start()
   {
     _aircrafts = new Dictionary<string, GameObject>();
     _receivedData = new Queue<FlightSet>();
     _topLevelObject = GameObject.Find(TopLevelName);
-  }
+    _sound = GetComponent<AudioSource>();
+    }
 
 #if UNITY_UWP
 
@@ -126,6 +129,14 @@ public class AircraftLoader : MonoBehaviour
     {
       controller.SetNewFlightData(flight);
     }
+  }
+
+  public void AircraftSelected(object id)
+  {
+    _sound.Play();
+#if UNITY_UWP
+    DataService.Instance.SelectFlight(id.ToString());
+#endif
   }
 
 }

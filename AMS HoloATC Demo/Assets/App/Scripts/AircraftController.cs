@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using FlightDataService.DataObjects;
 
@@ -11,12 +12,22 @@ public class AircraftController : MonoBehaviour
   private bool _initComplete;
   private bool _firstMove;
   private GameObject _label;
+  private bool _isActive;
+  private AudioSource _sound;
+  private Dictionary<MeshRenderer, Color> _originalColors;
 
 
   void Start()
   {
     _text = transform.GetComponentInChildren<TextMesh>();
     _label = transform.FindChild("Label").gameObject;
+    _sound = GetComponent<AudioSource>();
+
+    _originalColors = new Dictionary<MeshRenderer, Color>();
+    foreach (var component in GetComponentsInChildren<MeshRenderer>())
+    {
+      _originalColors.Add(component, component.material.color);
+    }
     _initComplete = true;
   }
 
@@ -37,6 +48,7 @@ public class AircraftController : MonoBehaviour
       {
         SetNewFlightText();
       }
+      SetHighlight();
     }
   }
 
@@ -147,5 +159,34 @@ public class AircraftController : MonoBehaviour
       }
     }
     return 0;
+  }
+
+  private void SetHighlight()
+  {
+    if (_isActive != _flightData.IsActive)
+    {
+      foreach (var component in GetComponentsInChildren<MeshRenderer>())
+      {
+        if (component.material.color == Color.white ||
+            component.material.color == Color.red)
+        {
+          component.material.color = _flightData.IsActive ?
+             Color.red : _originalColors[component];
+        }
+      }
+      if (_flightData.IsActive)
+      {
+        _sound.Play();
+      }
+      else
+      {
+        _sound.Stop();
+      }
+      _isActive = _flightData.IsActive;
+    }
+  }
+  private void OnSelect()
+  {
+    SendMessageUpwards("AircraftSelected", _flightData.Id);
   }
 }

@@ -19,7 +19,7 @@ public class DataService : Singleton<DataService>
   public DataService()
   {
 #if UNITY_UWP
-    _client = new MobileServiceClient(new Uri("http://flightservicesdemo.azurewebsites.net/"));
+    _client = new MobileServiceClient(new Uri(DataUrl));
 #endif
   }
 
